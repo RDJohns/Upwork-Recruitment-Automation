@@ -1,6 +1,6 @@
 from typing import Dict, Any, List, Tuple
-from ..utils.config import config
-from ..utils.logger import logger
+from utils.config import config
+from utils.logger import logger
 
 
 class CandidateScoringEngine:

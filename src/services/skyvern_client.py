@@ -2,8 +2,9 @@ import requests
 import json
 import time
 from typing import Dict, Any, Optional, List
-from .utils.config import config
-from .utils.logger import logger
+from utils.config import config
+from utils.logger import logger
+from utils.helpers import retry_on_exception
 
 
 class SkyvernClient:
@@ -48,27 +49,22 @@ class SkyvernClient:
             raise
     
     @retry_on_exception(max_retries=3, delay=2.0)
-    def execute_task(self, task_definition: Dict[str, Any]) -> Dict[str, Any]:
+    def execute_task(self, task_data: Dict[str, Any]) -> Dict[str, Any]:
         """Exécute une tâche Skyvern"""
         try:
-            logger.info("🤖 Exécution tâche Skyvern", task_type=task_definition.get('navigation_goal'))
+            logger.info(f"Exécution tâche Skyvern: {task_data.get('navigation_goal', 'N/A')}")
             
-            # Créer la tâche
-            task_response = self._make_request('POST', '/tasks', task_definition)
-            task_id = task_response.get('task_id')
+            result = self._make_request('POST', 'run/tasks', task_data)
             
-            if not task_id:
-                raise ValueError("Réponse Skyvern invalide: task_id manquant")
+            if result.get('status') == 'completed':
+                logger.info("✅ Tâche Skyvern complétée")
+            else:
+                logger.warning(f"⚠️ Tâche Skyvern: {result.get('status', 'unknown')}")
             
-            logger.info(f"Tâche créée: {task_id}")
-            
-            # Attendre la complétion
-            result = self._wait_for_completion(task_id)
-            
-            logger.info(f"✅ Tâche complétée: {task_id}", status=result.get('status'))
             return result
             
         except Exception as e:
+            logger.error(f"❌ Erreur exécution tâche: {e}")
             logger.error(f"Échec exécution tâche Skyvern: {e}")
             raise
     

@@ -3,7 +3,7 @@ Définitions des tâches Skyvern pour l'automation Upwork
 """
 
 from typing import Dict, Any, List
-from ....utils.logger import logger
+from utils.logger import logger
 
 
 class UpworkTasks:
