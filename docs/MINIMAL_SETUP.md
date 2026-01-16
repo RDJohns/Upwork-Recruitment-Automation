@@ -105,7 +105,10 @@ pip install -r requirements.txt
 
 # Installation avec email 2FA automation
 pip install -r requirements.txt
-pip install imaplib2
+# pip install imaplib2  # Décommenter pour email 2FA
+
+# Note: Skyvern est open source
+# pip install git+https://github.com/Skyvern-AI/skyvern.git
 
 # Configuration minimale
 cp .env.example .env

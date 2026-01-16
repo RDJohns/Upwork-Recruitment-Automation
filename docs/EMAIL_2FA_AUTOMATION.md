@@ -19,7 +19,10 @@ L'approche la plus propre pour l'automatisation 2FA Upwork :
 pip install -r requirements.txt
 
 # Ajouter le support email (optionnel)
-pip install imaplib2
+# pip install imaplib2  # Décommenter pour email 2FA
+
+# Note: Skyvern est open source
+# pip install git+https://github.com/Skyvern-AI/skyvern.git
 ```
 
 ### Configuration

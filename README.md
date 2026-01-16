@@ -144,11 +144,14 @@ venv\Scripts\activate     # Windows
 # Mettre à jour pip
 pip install --upgrade pip
 
-# Installer les dépendances
+# Installer les dépendances de base
 pip install -r requirements.txt
 
+# Note: Skyvern est open source, installer depuis GitHub si nécessaire
+# pip install git+https://github.com/Skyvern-AI/skyvern.git
+
 # Vérifier l'installation
-pip list | grep -E "(airtable|skyvern|kestra)"
+pip list | grep -E "(airtable|requests|kestra)"
 ```
 
 ### Étape 3: Configuration des variables d'environnement
@@ -682,14 +685,16 @@ WEIGHTS = {
 ### Documentation complémentaire
 
 - [Kestra Documentation](https://kestra.io/docs/)
-- [Skyvern API Documentation](https://www.skyvern.com/docs)
-- [Skyvern API Reference](https://www.skyvern.com/docs/api-reference/api-reference/agent/run-task)
+- [Skyvern Documentation](https://www.skyvern.com/docs)
+- [Skyvern GitHub](https://github.com/Skyvern-AI/skyvern)
+- [Skyvern API Reference](https://www.skyvern.com/docs/api-reference/agent/run-task)
 - [Airtable API Documentation](https://airtable.com/developers/web/api)
 - [Google Cloud Storage Documentation](https://cloud.google.com/storage/docs)
 
 ### Guides spécialisés
 
 - 📄 **[Setup Minimal](docs/MINIMAL_SETUP.md)** : Démarrage avec 2 variables seulement
+- 📦 **[Skyvern Installation](docs/SKYVERN_INSTALLATION.md)** : Installation open source
 - 🤖 **[Email 2FA Automation](docs/EMAIL_2FA_AUTOMATION.md)** : Configuration complète automatique
 
 ### Dépannage commun
