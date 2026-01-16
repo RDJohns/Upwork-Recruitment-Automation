@@ -9,6 +9,9 @@ requests==2.31.0
 # Skyvern client (hypothetical version - à vérifier)
 skyvern==0.1.0
 
+# Email processing for 2FA automation (optional)
+# imaplib2==2.1.0  # Uncomment for email 2FA automation
+
 # Testing
 pytest==7.4.3
 pytest-cov==4.1.0

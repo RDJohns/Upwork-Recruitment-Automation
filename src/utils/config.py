@@ -15,12 +15,15 @@ class Config:
     
     # Skyvern Configuration
     SKYVERN_API_KEY: str = os.getenv("SKYVERN_API_KEY", "")
-    SKYVERN_BASE_URL: str = os.getenv("SKYVERN_BASE_URL", "https://api.skyvern.ai")
+    SKYVERN_BASE_URL: str = os.getenv("SKYVERN_BASE_URL", "").rstrip('/') or 'https://api.skyvern.com'
     
     # Upwork Credentials
     UPWORK_USERNAME: str = os.getenv("UPWORK_USERNAME", "")
     UPWORK_PASSWORD: str = os.getenv("UPWORK_PASSWORD", "")
-    UPWORK_2FA_BACKUP: str = os.getenv("UPWORK_2FA_BACKUP", "")
+    UPWORK_2FA_METHOD: str = os.getenv("UPWORK_2FA_METHOD", "email")  # email, backup_code, authenticator
+    UPWORK_EMAIL_ACCESS: bool = os.getenv("UPWORK_EMAIL_ACCESS", "false").lower() == "true"
+    UPWORK_2FA_EMAIL: str = os.getenv("UPWORK_2FA_EMAIL", "")
+    UPWORK_EMAIL_PASSWORD: str = os.getenv("UPWORK_EMAIL_PASSWORD", "")
     
     # Google Cloud Storage
     GCS_BUCKET_NAME: str = os.getenv("GCS_BUCKET_NAME", "upwork-automation-screenshots")

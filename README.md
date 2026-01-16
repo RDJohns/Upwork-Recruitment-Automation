@@ -173,10 +173,15 @@ AIRTABLE_BASE_ID=appxxxxxxxxxxxxxxxxxxxxxx
 SKYVERN_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxx
 SKYVERN_BASE_URL=https://api.skyvern.com
 
-# Upwork Credentials
+# Upwork Credentials (obligatoire)
 UPWORK_USERNAME=votre-email@domain.com
-UPWORK_PASSWORD=votre-mot-de-passe-upwork
-UPWORK_2FA_BACKUP=12345678  # Code backup 2FA
+UPWORK_PASSWORD=votre-mot-de-passe
+
+# 2FA Configuration (optionnel - pour automation complète)
+# UPWORK_2FA_METHOD=email                    # email, backup_code, authenticator
+# UPWORK_EMAIL_ACCESS=false                  # true pour activer lecture automatique
+# UPWORK_2FA_EMAIL=votre-email-2fa@domaine.com
+# UPWORK_EMAIL_PASSWORD=votre-mot-de-passe-email-2fa
 
 # ======== INFRASTRUCTURE ========
 # Google Cloud Storage
@@ -459,7 +464,10 @@ kestra secrets set AIRTABLE_API_KEY "votre-clé-airtable-complète"
 kestra secrets set SKYVERN_API_KEY "votre-clé-skyvern-complète"
 kestra secrets set UPWORK_USERNAME "votre-email-upwork"
 kestra secrets set UPWORK_PASSWORD "votre-mot-de-passe-upwork"
-kestra secrets set UPWORK_2FA_BACKUP "votre-code-2fa-backup"
+# kestra secrets set UPWORK_2FA_METHOD "email"                    # optionnel
+# kestra secrets set UPWORK_EMAIL_ACCESS "false"                  # optionnel
+# kestra secrets set UPWORK_2FA_EMAIL "votre-email-2fa@domaine.com"  # optionnel
+# kestra secrets set UPWORK_EMAIL_PASSWORD "votre-mot-de-passe-email" # optionnel
 kestra secrets set GCS_CREDENTIALS "$(cat gcs-credentials.json)"
 ```
 
@@ -678,6 +686,11 @@ WEIGHTS = {
 - [Skyvern API Reference](https://www.skyvern.com/docs/api-reference/api-reference/agent/run-task)
 - [Airtable API Documentation](https://airtable.com/developers/web/api)
 - [Google Cloud Storage Documentation](https://cloud.google.com/storage/docs)
+
+### Guides spécialisés
+
+- 📄 **[Setup Minimal](docs/MINIMAL_SETUP.md)** : Démarrage avec 2 variables seulement
+- 🤖 **[Email 2FA Automation](docs/EMAIL_2FA_AUTOMATION.md)** : Configuration complète automatique
 
 ### Dépannage commun
 

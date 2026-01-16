@@ -19,6 +19,14 @@
 - [ ] Environnement activé (`source venv/bin/activate`)
 - [ ] Dépendances installées (`pip install -r requirements.txt`)
 - [ ] Fichier `.env` créé et configuré
+- [ ] Variables **obligatoires** configurées :
+  - [ ] UPWORK_USERNAME=votre-email@domain.com
+  - [ ] UPWORK_PASSWORD=votre-mot-de-passe
+- [ ] Variables **optionnelles** 2FA (si automation complète souhaitée) :
+  - [ ] UPWORK_2FA_METHOD=email
+  - [ ] UPWORK_EMAIL_ACCESS=false
+  - [ ] UPWORK_2FA_EMAIL=votre-email-2fa@domaine.com
+  - [ ] UPWORK_EMAIL_PASSWORD=votre-mot-de-passe-email
 - [ ] Variables d'environnement validées
 
 ## ✅ Infrastructure Airtable
@@ -52,10 +60,17 @@
 - [ ] Secrets configurés :
   - [ ] AIRTABLE_API_KEY
   - [ ] SKYVERN_API_KEY
-  - [ ] UPWORK_USERNAME
-  - [ ] UPWORK_PASSWORD
-  - [ ] UPWORK_2FA_BACKUP
+  - [ ] UPWORK_USERNAME (obligatoire)
+  - [ ] UPWORK_PASSWORD (obligatoire)
+  - [ ] UPWORK_2FA_METHOD (optionnel)
+  - [ ] UPWORK_EMAIL_ACCESS (optionnel)
+  - [ ] UPWORK_2FA_EMAIL (optionnel)
+  - [ ] UPWORK_EMAIL_PASSWORD (optionnel)
   - [ ] GCS_CREDENTIALS
+- [ ] Configuration 2FA Upwork :
+  - [ ] Email passcode configuré (recommandé)
+  - [ ] Backup codes générés
+  - [ ] Test de réception des codes
 - [ ] Workflows importés
 - [ ] Flows visibles dans l'interface
 

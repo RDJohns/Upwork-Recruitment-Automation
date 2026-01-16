@@ -10,9 +10,9 @@ class UpworkTasks:
     """Définition des tâches Skyvern pour Upwork en langage naturel"""
     
     @staticmethod
-    def login_task(username: str, password: str, backup_code: str = None) -> Dict[str, Any]:
-        """Tâche de connexion à Upwork"""
-        task = {
+    def login_task(username: str, password: str) -> Dict[str, Any]:
+        """Tâche de connexion à Upwork (sans 2FA - géré automatiquement)"""
+        return {
             "url": "https://www.upwork.com/ab/account-security/login",
             "navigation_goal": "Log in to Upwork account",
             "data_extraction_goal": "Confirm successful login and extract user name",
@@ -22,14 +22,9 @@ class UpworkTasks:
             },
             "error_handling": {
                 "captcha": "auto_solve",
-                "2fa": "use_backup_code" if backup_code else "manual"
+                "2fa": "wait_for_automation"  # Indique que le système gérera 2FA
             }
         }
-        
-        if backup_code:
-            task["navigation_payload"]["2fa_code"] = backup_code
-        
-        return task
     
     @staticmethod
     def publish_job_task(job_data: Dict[str, Any]) -> Dict[str, Any]:
