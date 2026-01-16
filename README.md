@@ -152,6 +152,7 @@ pip install -r requirements.txt
 
 # Vérifier l'installation
 pip list | grep -E "(airtable|requests|kestra)"
+# Résultat attendu: airtable, requests, kestra (version 0.18.0+)
 ```
 
 ### Étape 3: Configuration des variables d'environnement

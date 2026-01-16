@@ -118,6 +118,17 @@ except ImportError as e:
     print('💡 Installez: pip install git+https://github.com/Skyvern-AI/skyvern.git')
 "
 
+# Tester Kestra
+python -c "
+try:
+    import kestra
+    print('✅ Kestra installé avec succès')
+    print(f'Version: {kestra.__version__}')
+except ImportError as e:
+    print(f'❌ Erreur import Kestra: {e}')
+    print('💡 Installez: pip install kestra==0.18.0')
+"
+
 # Tester l'API directement
 python -c "
 import requests
@@ -193,10 +204,11 @@ pip install git+https://github.com/Skyvern-AI/skyvern.git
 **"Version conflicts"**
 ```bash
 # Désinstaller les anciennes versions
-pip uninstall skyvern
+pip uninstall skyvern kestra
 
 # Réinstaller proprement
 pip install git+https://github.com/Skyvern-AI/skyvern.git
+pip install kestra==0.18.0
 ```
 
 **"Permission denied"**

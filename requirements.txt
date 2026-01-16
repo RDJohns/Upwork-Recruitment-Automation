@@ -9,8 +9,8 @@ requests==2.31.0
 # Skyvern client (open source - installer depuis GitHub)
 # skyvern==0.1.0  # Package pip n'existe pas encore
 
-# Kestra client
-kestra==0.17.0
+# Kestra client (version disponible)
+kestra==0.18.0
 
 # Email processing for 2FA automation (optional)
 # imaplib2==2.1.0  # Uncomment for email 2FA automation
