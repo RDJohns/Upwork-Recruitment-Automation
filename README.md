@@ -699,6 +699,7 @@ WEIGHTS = {
 
 - 📄 **[Setup Minimal](docs/MINIMAL_SETUP.md)** : Démarrage avec 2 variables seulement
 - 📦 **[Skyvern Installation](docs/SKYVERN_INSTALLATION.md)** : Installation open source
+- 🔧 **[Dependency Conflicts](docs/DEPENDENCY_CONFLICTS.md)** : Gestion des conflits
 - 🤖 **[Email 2FA Automation](docs/EMAIL_2FA_AUTOMATION.md)** : Configuration complète automatique
 
 ### Dépannage commun
