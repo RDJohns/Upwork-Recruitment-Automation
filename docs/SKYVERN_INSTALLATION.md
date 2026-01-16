@@ -204,11 +204,15 @@ pip install git+https://github.com/Skyvern-AI/skyvern.git
 **"Version conflicts"**
 ```bash
 # Désinstaller les anciennes versions
-pip uninstall skyvern kestra
+pip uninstall skyvern kestra python-dotenv
 
 # Réinstaller proprement
 pip install git+https://github.com/Skyvern-AI/skyvern.git
 pip install kestra==0.18.0
+pip install --upgrade python-dotenv
+
+# Ou résoudre les conflits automatiquement
+pip install --upgrade -r requirements.txt
 ```
 
 **"Permission denied"**

@@ -147,6 +147,9 @@ pip install --upgrade pip
 # Installer les dépendances de base
 pip install -r requirements.txt
 
+# Si conflit de dépendances, mettre à jour python-dotenv
+pip install --upgrade python-dotenv
+
 # Note: Skyvern est open source, installer depuis GitHub si nécessaire
 # pip install git+https://github.com/Skyvern-AI/skyvern.git
 
