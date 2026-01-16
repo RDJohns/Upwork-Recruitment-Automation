@@ -59,6 +59,10 @@ def test_basic_imports():
 def test_configuration():
     """Test la configuration"""
     try:
+        # Recharger python-dotev pour éviter les erreurs de cache
+        from dotenv import load_dotenv
+        load_dotenv(override=True)  # Forcer le rechargement
+        
         from utils.config import config
         
         # Test variables de configuration
@@ -71,11 +75,18 @@ def test_configuration():
         return True
     except Exception as e:
         print(f"❌ Erreur configuration: {e}")
+        print("💡 Solution: Vérifiez le format du fichier .env")
+        print("   - Pas de caractères spéciaux non échappés")
+        print("   - Pas de sauts de ligne dans les valeurs")
+        print("   - Utilisez des guillemets si nécessaire")
         return False
 
 def test_basic_functionality():
     """Test les fonctionnalités de base"""
     try:
+        # Import requests ici pour éviter l'erreur de portée
+        import requests
+        
         # Test création de fichier
         test_file = Path("test_output.txt")
         test_file.write_text("Test de fonctionnement")
