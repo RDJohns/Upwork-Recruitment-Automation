@@ -171,7 +171,7 @@ AIRTABLE_BASE_ID=appxxxxxxxxxxxxxxxxxxxxxx
 
 # Skyvern (obtenir depuis app.skyvern.com/settings)
 SKYVERN_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxx
-SKYVERN_BASE_URL=https://api.skyvern.com
+SKYVERN_BASE_URL=https://api.skyvern.com/v1
 
 # Upwork Credentials (obligatoire)
 UPWORK_USERNAME=votre-email@domain.com

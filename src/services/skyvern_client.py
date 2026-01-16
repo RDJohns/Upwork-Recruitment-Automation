@@ -16,7 +16,7 @@ class SkyvernClient:
             raise ValueError("Configuration Skyvern API key manquante")
         
         self.api_key = config.SKYVERN_API_KEY
-        self.base_url = config.SKYVERN_BASE_URL.rstrip('/') or 'https://api.skyvern.com'
+        self.base_url = config.SKYVERN_BASE_URL.rstrip('/') or 'https://api.skyvern.com/v1'
         self.session = requests.Session()
         self.session.headers.update({
             'Authorization': f'Bearer {self.api_key}',

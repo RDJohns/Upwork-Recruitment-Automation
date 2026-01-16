@@ -15,7 +15,7 @@ class Config:
     
     # Skyvern Configuration
     SKYVERN_API_KEY: str = os.getenv("SKYVERN_API_KEY", "")
-    SKYVERN_BASE_URL: str = os.getenv("SKYVERN_BASE_URL", "").rstrip('/') or 'https://api.skyvern.com'
+    SKYVERN_BASE_URL: str = os.getenv("SKYVERN_BASE_URL", "https://api.skyvern.com/v1")
     
     # Upwork Credentials
     UPWORK_USERNAME: str = os.getenv("UPWORK_USERNAME", "")
