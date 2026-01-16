@@ -44,7 +44,7 @@
 
 - [ ] Google Cloud SDK installé (`gcloud --version`)
 - [ ] Projet GCP créé/sélectionné
-- [ ] Bucket GCS créé (`gsutil mb`)
+- [ ] Bucket GCS créé avec nom unique (`gsutil mb gs://upwork-automation-$(date +%s)-$(whoami)`)
 - [ ] Service Account créé
 - [ ] Permissions Storage configurées
 - [ ] Clé JSON téléchargée et placée dans le projet

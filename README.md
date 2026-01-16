@@ -192,7 +192,7 @@ UPWORK_PASSWORD=votre-mot-de-passe
 
 # ======== INFRASTRUCTURE ========
 # Google Cloud Storage
-GCS_BUCKET_NAME=upwork-automation-screenshots
+GCS_BUCKET_NAME=upwork-automation-$(date +%s)-$(whoami)  # Remplacer avec votre nom unique
 GCS_CREDENTIALS_PATH=/path/to/service-account.json
 
 # ======== APPLICATION ========
@@ -345,6 +345,7 @@ gsutil iam ch allUsers:objectViewer gs://$BUCKET_NAME
 
 # Noter le nom du bucket pour .env
 echo "Bucket créé: $BUCKET_NAME"
+echo "Ajouter dans .env: GCS_BUCKET_NAME=$BUCKET_NAME"
 ```
 
 #### 5.2 Configuration du Service Account

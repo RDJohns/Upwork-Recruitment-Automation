@@ -26,7 +26,7 @@ class Config:
     UPWORK_EMAIL_PASSWORD: str = os.getenv("UPWORK_EMAIL_PASSWORD", "")
     
     # Google Cloud Storage
-    GCS_BUCKET_NAME: str = os.getenv("GCS_BUCKET_NAME", "upwork-automation-screenshots")
+    GCS_BUCKET_NAME: str = os.getenv("GCS_BUCKET_NAME", "upwork-automation-screenshots")  # Remplacer avec votre nom unique
     GCS_CREDENTIALS_PATH: str = os.getenv("GCS_CREDENTIALS_PATH", "")
     
     # Application Settings

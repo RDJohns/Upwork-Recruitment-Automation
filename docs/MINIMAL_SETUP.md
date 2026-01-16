@@ -17,10 +17,10 @@ UPWORK_PASSWORD=votre-mot-de-passe
 AIRTABLE_API_KEY=patxxxxxxxxxxxxxxxxxxxxxx
 AIRTABLE_BASE_ID=appxxxxxxxxxxxxxxxxxxxxxx
 SKYVERN_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxx
-SKYVERN_BASE_URL=https://api.skyvern.com
+SKYVERN_BASE_URL=https://api.skyvern.com/v1
 UPWORK_USERNAME=votre-email@domain.com
 UPWORK_PASSWORD=votre-mot-de-passe
-GCS_BUCKET_NAME=upwork-automation-screenshots
+GCS_BUCKET_NAME=upwork-automation-$(date +%s)-$(whoami)  # Remplacer avec votre nom unique
 GCS_CREDENTIALS_PATH=/path/to/service-account.json
 ```
 
