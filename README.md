@@ -169,9 +169,9 @@ nano .env  # ou vim .env, ou code .env
 AIRTABLE_API_KEY=patxxxxxxxxxxxxxxxxxxxxxx
 AIRTABLE_BASE_ID=appxxxxxxxxxxxxxxxxxxxxxx
 
-# Skyvern (obtenir depuis dashboard.skyvern.ai)
+# Skyvern (obtenir depuis app.skyvern.com/settings)
 SKYVERN_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxx
-SKYVERN_BASE_URL=https://api.skyvern.ai
+SKYVERN_BASE_URL=https://api.skyvern.com
 
 # Upwork Credentials
 UPWORK_USERNAME=votre-email@domain.com
@@ -674,7 +674,8 @@ WEIGHTS = {
 ### Documentation complémentaire
 
 - [Kestra Documentation](https://kestra.io/docs/)
-- [Skyvern API Documentation](https://docs.skyvern.ai/)
+- [Skyvern API Documentation](https://www.skyvern.com/docs)
+- [Skyvern API Reference](https://www.skyvern.com/docs/api-reference/api-reference/agent/run-task)
 - [Airtable API Documentation](https://airtable.com/developers/web/api)
 - [Google Cloud Storage Documentation](https://cloud.google.com/storage/docs)
 

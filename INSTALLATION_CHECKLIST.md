@@ -8,7 +8,7 @@
 - [ ] Accès internet stable
 - [ ] Comptes créés :
   - [ ] Airtable (Pro/Enterprise)
-  - [ ] Skyvern
+  - [ ] Skyvern (app.skyvern.com)
   - [ ] Upwork
   - [ ] Google Cloud Platform
 
