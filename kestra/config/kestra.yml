@@ -1,0 +1,25 @@
+kestra:
+  server:
+    baseUrl: http://localhost:8080
+  repository:
+    type: postgres
+    datasource:
+      url: jdbc:postgresql://postgres:5432/kestra
+      username: kestra
+      password: kestra
+  storage:
+    type: local
+    base-path: /app/storage
+  queue:
+    type: postgres
+    datasource:
+      url: jdbc:postgresql://postgres:5432/kestra
+      username: kestra
+      password: kestra
+  tasks:
+    tmp-dir:
+      path: /app/tmp
+  plugins:
+    configurations:
+      - type: io.kestra.plugin.core.log.Log
+        level: INFO

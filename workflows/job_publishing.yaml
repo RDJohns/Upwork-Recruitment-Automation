@@ -1,0 +1,183 @@
+id: upwork_job_publishing
+namespace: recruitment.upwork
+
+description: |
+  Workflow pour publier automatiquement les offres d'emploi sur Upwork.
+  Récupère les jobs avec statut "To Publish" et les publie via Skyvern.
+
+variables:
+  max_parallel_jobs: 3
+  batch_size: 5
+
+tasks:
+  - id: fetch_jobs_to_publish
+    type: io.kestra.plugin.scripts.shell.Commands
+    description: "Récupère les jobs à publier depuis Airtable"
+    inputFiles:
+      script.py: |
+        import sys
+        import json
+        sys.path.append('/app')
+        
+        from src.services.airtable_client import AirtableClient
+        
+        try:
+            airtable = AirtableClient()
+            jobs = airtable.get_jobs_to_publish()
+            
+            result = {
+                "success": True,
+                "jobs_count": len(jobs),
+                "jobs": jobs
+            }
+            
+            print(json.dumps(result))
+            
+        except Exception as e:
+            error_result = {
+                "success": False,
+                "error": str(e)
+            }
+            print(json.dumps(error_result))
+            sys.exit(1)
+    
+    commands:
+      - python /app/inputs/script.py
+    outputFiles:
+      - "*.json"
+
+  - id: validate_jobs
+    type: io.kestra.plugin.core.flow.If
+    description: "Vérifie qu'il y a des jobs à publier"
+    condition: "{{ outputs.fetch_jobs_to_publish.vars.jobs_count > 0 }}"
+    
+    then:
+      - id: publish_jobs_batch
+        type: io.kestra.plugin.core.flow.EachSequential
+        description: "Publie chaque job en séquentiel"
+        items: "{{ outputs.fetch_jobs_to_publish.vars.jobs }}"
+        
+        tasks:
+          - id: publish_single_job
+            type: io.kestra.plugin.scripts.shell.Commands
+            description: "Publie un job individuel sur Upwork"
+            inputFiles:
+              script.py: |
+                import sys
+                import json
+                sys.path.append('/app')
+                
+                from src.services.airtable_client import AirtableClient
+                from src.services.skyvern_client import SkyvernClient
+                from datetime import datetime
+                
+                job_data = json.loads('{{ taskrun.value }}')
+                job_id = job_data['id']
+                job_fields = job_data['fields']
+                
+                try:
+                    # Initialiser les clients
+                    airtable = AirtableClient()
+                    skyvern = SkyvernClient()
+                    
+                    # S'assurer d'être authentifié
+                    if not skyvern.ensure_authenticated("upwork"):
+                        raise Exception("Échec authentification Upwork")
+                    
+                    # Publier le job
+                    job_url = skyvern.publish_upwork_job(job_fields)
+                    
+                    if job_url:
+                        # Mettre à jour Airtable
+                        airtable.update_job(job_id, {
+                            'Status': 'Published',
+                            'Upwork URL': job_url,
+                            'Published Date': datetime.now().isoformat()
+                        })
+                        
+                        # Logger l'événement
+                        airtable.log_system_event(
+                            f"Job publié avec succès: {job_url}",
+                            job_id=job_id
+                        )
+                        
+                        # Incrémenter la métrique
+                        airtable.increment_metric('Jobs Published')
+                        
+                        result = {
+                            "success": True,
+                            "job_id": job_id,
+                            "job_url": job_url,
+                            "title": job_fields.get('Title')
+                        }
+                    else:
+                        result = {
+                            "success": False,
+                            "job_id": job_id,
+                            "error": "Échec publication job"
+                        }
+                    
+                    print(json.dumps(result))
+                    
+                except Exception as e:
+                    error_result = {
+                        "success": False,
+                        "job_id": job_id,
+                        "error": str(e)
+                    }
+                    print(json.dumps(error_result))
+                    sys.exit(1)
+            
+            commands:
+              - python /app/inputs/script.py
+            outputFiles:
+              - "*.json"
+
+  - id: log_summary
+    type: io.kestra.plugin.scripts.shell.Commands
+    description: "Génère un résumé de l'exécution"
+    runBefore:
+      - type: io.kestra.plugin.core.flow.If
+        condition: "{{ outputs.validate_jobs.vars == null }}"
+        then:
+          - id: no_jobs_log
+            type: io.kestra.plugin.core.log.Log
+            message: "ℹ️ Aucun job à publier"
+    
+    inputFiles:
+      script.py: |
+        import sys
+        import json
+        sys.path.append('/app')
+        
+        from src.services.airtable_client import AirtableClient
+        
+        try:
+            airtable = AirtableClient()
+            
+            # Compter les jobs publiés aujourd'hui
+            today_published = airtable.get_metric_value('Jobs Published')
+            
+            summary = {
+                "execution_time": "{{ execution.startDate }}",
+                "jobs_published_today": today_published,
+                "workflow": "job_publishing"
+            }
+            
+            print(json.dumps(summary, indent=2))
+            
+        except Exception as e:
+            print(f"Erreur génération résumé: {e}")
+            sys.exit(1)
+    
+    commands:
+      - python /app/inputs/script.py
+
+triggers:
+  - id: schedule_publishing
+    type: io.kestra.core.models.triggers.types.Schedule
+    description: "Exécute toutes les 5 minutes"
+    cron: "*/5 * * * *"
+    inputs:
+      max_parallel_jobs: 3
+      batch_size: 5
